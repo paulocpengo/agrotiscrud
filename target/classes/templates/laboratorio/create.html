@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
+    <meta charset="UTF-8">
+    <title>Novo Cadastro de Laboratório</title>
+    <link rel="stylesheet" href="/css/agrotis.css" th:href="@{/css/agrotis.css}">
+</head>
+<body>
+<div class="header">AGROTIS</div>
+<div class="container">
+    <h1>Novo Cadastro de Laboratório</h1>
+    <form th:action="@{/laboratorios}" th:object="${laboratorio}" method="post">
+        <div class="form-group">
+            <label class="required">Nome:</label>
+            <input type="text" th:field="*{nome}" class="form-control" />
+            <span th:if="${#fields.hasErrors('nome')}" class="error" th:errors="*{nome}"></span>
+        </div>
+        <button type="submit">SALVAR</button>
+    </form>
+    <a href="/laboratorios" class="btn-back">Voltar</a>
+</div>
+</body>
+</html>

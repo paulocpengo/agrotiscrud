@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "c41cb05f-60ef-4c60-a65d-38d4eeef807a",
+		"name": "Agrotis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3778161"
+	},
+	"item": [
+		{
+			"name": "Laboratórios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/laboratorios/summary?minPessoas=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"laboratorios",
+						"summary"
+					],
+					"query": [
+						{
+							"key": "minPessoas",
+							"value": "1"
+						},
+						{
+							"key": "dataInicialInicio",
+							"value": "2025-05-10T00:00:00-03:00",
+							"disabled": true
+						},
+						{
+							"key": "dataInicialFim",
+							"value": "2025-05-10T00:00:00-03:00",
+							"disabled": true
+						},
+						{
+							"key": "dataFinalInicio",
+							"value": "2025-05-10T00:00:00-03:00",
+							"disabled": true
+						},
+						{
+							"key": "dataFinalFim",
+							"value": "2025-05-10T00:00:00-03:00",
+							"disabled": true
+						},
+						{
+							"key": "observacoes",
+							"value": "tes",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CriarPessoa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"Jon Doe 2\",\n    \"dataInicial\": \"2022-02-02T17:41:44Z\",\n    \"dataFinal\": \"2022-02-02T17:41:44Z\",\n    \"infosPropriedade\": {\n        \"id\": 1\n    },\n    \"laboratorio\": {\n        \"id\": 1\n    },\n    \"observacoes\": \"Observacao exemplo de teste\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/pessoa/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"pessoa",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

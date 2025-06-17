@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
+    <meta charset="UTF-8">
+    <title>Lista de Pessoas</title>
+    <link rel="stylesheet" href="/css/agrotis.css" th:href="@{/css/agrotis.css}">
+    <style>
+        .person-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .person-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .person-card div {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .person-card label {
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .person-card span {
+            display: block;
+            padding: 5px;
+            background-color: #F5F5F5;
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .actions form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="header">AGROTIS</div>
+<div class="container">
+    <h1>Lista de Pessoas</h1>
+    <div>
+        <a href="/" class="btn-back">Home</a>
+        <a href="/pessoas/create" class="btn-back">Criar Nova Pessoa</a>
+    </div>
+    <div class="person-list" th:each="pessoa : ${pessoas}">
+        <div class="person-card">
+            <div><label>ID:</label> <span th:text="${pessoa.id}"></span></div>
+            <div><label>Nome:</label> <span th:text="${pessoa.nome}"></span></div>
+            <div><label>Data Inicial:</label> <span th:text="${#temporals.format(pessoa.dataInicial, 'yyyy-MM-dd')}"></span></div>
+            <div><label>Data Final:</label> <span th:text="${#temporals.format(pessoa.dataFinal, 'yyyy-MM-dd')}"></span></div>
+            <div><label>Propriedade:</label> <span th:text="${pessoa.infosPropriedade.nome}"></span></div>
+            <div><label>Laboratório:</label> <span th:text="${pessoa.laboratorio.nome}"></span></div>
+            <div><label>Observações:</label> <span th:text="${pessoa.observacoes}"></span></div>
+            <div class="actions">
+                <a th:href="@{/pessoas/{id}(id=${pessoa.id})}" class="btn-back">Ver</a>
+                <a th:href="@{/pessoas/{id}/edit(id=${pessoa.id})}" class="btn-back">Editar</a>
+                <form th:action="@{/pessoas/{id}/delete(id=${pessoa.id})}" method="post" style="display:inline;">
+                    <button type="submit">Deletar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

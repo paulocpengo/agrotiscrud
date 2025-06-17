@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
+    <meta charset="UTF-8">
+    <title>Editar Propriedade</title>
+    <link rel="stylesheet" href="/css/agrotis.css" th:href="@{/css/agrotis.css}">
+</head>
+<body>
+<div class="header">AGROTIS</div>
+<div class="container">
+    <h1>Editar Propriedade</h1>
+    <form th:action="@{/propriedades/{id}(id=${propriedade.id})}" th:object="${propriedade}" method="post">
+        <div class="form-group">
+            <label class="required">Nome:</label>
+            <input type="text" th:field="*{nome}" class="form-control" />
+            <span th:if="${#fields.hasErrors('nome')}" class="error" th:errors="*{nome}"></span>
+        </div>
+        <button type="submit">SALVAR</button>
+    </form>
+    <a href="/propriedades" class="btn-back">Voltar</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
+    <meta charset="UTF-8">
+    <title>Visualizar Laboratório</title>
+    <link rel="stylesheet" href="/css/agrotis.css" th:href="@{/css/agrotis.css}">
+    <style>
+        .detail {
+            margin-bottom: 15px;
+        }
+        .detail label {
+            font-weight: bold;
+        }
+        .actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+        .actions form {
+            display: inline-flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="header">AGROTIS</div>
+<div class="container">
+    <h1>Detalhes do Laboratório</h1>
+    <div class="detail"><label>ID:</label> <span th:text="${laboratorio.id}"></span></div>
+    <div class="detail"><label>Nome:</label> <span th:text="${laboratorio.nome}"></span></div>
+    <div class="actions">
+        <a th:href="@{/laboratorios/{id}/edit(id=${laboratorio.id})}" class="btn-back">Editar</a>
+        <form th:action="@{/laboratorios/{id}/delete(id=${laboratorio.id})}" method="post" style="display:inline-flex;">
+            <button type="submit">Deletar</button>
+        </form>
+    </div>
+    <a href="/laboratorios" class="btn-back">Voltar</a>
+</div>
+</body>
+</html>

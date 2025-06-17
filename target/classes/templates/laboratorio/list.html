@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
+    <meta charset="UTF-8">
+    <title>Lista de Laboratórios</title>
+    <link rel="stylesheet" href="/css/agrotis.css" th:href="@{/css/agrotis.css}">
+    <style>
+        .lab-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .lab-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            align-items: center; /* Ensure vertical alignment of items */
+        }
+
+        .lab-card div {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .lab-card label {
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .lab-card span {
+            display: block;
+            padding: 5px;
+            background-color: #F5F5F5;
+            border-radius: 4px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            align-items: center; /* Vertically center align buttons */
+        }
+
+        .actions form {
+            display: inline-flex;
+            align-items: center;
+            margin: 0; /* Remove any default margin */
+        }
+
+        .actions button, .actions a.btn-back {
+            padding: 8px 15px; /* Consistent padding for all buttons */
+            font-size: 14px; /* Consistent font size */
+        }
+    </style>
+</head>
+<body>
+<div class="header">AGROTIS</div>
+<div class="container">
+    <h1>Lista de Laboratórios</h1>
+    <div>
+        <a href="/laboratorios/create" class="btn-back">Novo Laboratório</a>
+    </div>
+    <div class="lab-list" th:each="lab : ${laboratorios}">
+        <div class="lab-card">
+            <div><label>ID:</label> <span th:text="${lab.id}"></span></div>
+            <div><label>Nome:</label> <span th:text="${lab.nome}"></span></div>
+            <div class="actions">
+                <a th:href="@{/laboratorios/{id}(id=${lab.id})}" class="btn-back">Ver</a>
+                <a th:href="@{/laboratorios/{id}/edit(id=${lab.id})}" class="btn-back">Editar</a>
+                <form th:action="@{/laboratorios/{id}/delete(id=${lab.id})}" method="post" style="display:inline-flex;">
+                    <button type="submit">Deletar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <a href="/" class="btn-back">Voltar</a>
+</div>
+</body>
+</html>
