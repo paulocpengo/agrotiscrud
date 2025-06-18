@@ -22,7 +22,7 @@
             border-radius: 4px;
             background-color: #FFFFFF;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            align-items: center; /* Ensure vertical alignment of items */
+            align-items: center;
         }
 
         .lab-card div {
@@ -47,42 +47,79 @@
         .actions {
             display: flex;
             gap: 10px;
-            align-items: center; /* Vertically center align buttons */
+            align-items: center;
         }
 
         .actions form {
             display: inline-flex;
             align-items: center;
-            margin: 0; /* Remove any default margin */
+            margin: 0;
         }
 
         .actions button, .actions a.btn-back {
-            padding: 8px 15px; /* Consistent padding for all buttons */
-            font-size: 14px; /* Consistent font size */
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert-error {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #b91c1c;
+        }
+
+        .alert-success {
+            background-color: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
         }
     </style>
 </head>
 <body>
-<div class="header">AGROTIS</div>
+
+<div class="header"><img src="/img/agrotislogo.jpg" height="58" width="224"/></div>
+
 <div class="container">
-    <h1>Lista de Laboratórios</h1>
-    <div>
-        <a href="/laboratorios/create" class="btn-back">Novo Laboratório</a>
+    <div class="header-card">
+        <div class="card-text-title">
+            <a href="/" class="btn-back"> < </a>
+            Teste Back-End / <b>Lista de Laboratórios</b>
+        </div>
+        <div class="card-buttom-save">
+            <button><a th:href="@{/laboratorios/create}" class="bnt-action">Criar Laboratório</a></button>
+        </div>
     </div>
+
+    <br>
+
+    <!-- Exibir mensagens de erro ou sucesso -->
+    <div th:if="${errorMessage}" class="alert alert-error">
+        <span th:text="${errorMessage}"></span>
+    </div>
+    <div th:if="${successMessage}" class="alert alert-success">
+        <span th:text="${successMessage}"></span>
+    </div>
+
     <div class="lab-list" th:each="lab : ${laboratorios}">
         <div class="lab-card">
             <div><label>ID:</label> <span th:text="${lab.id}"></span></div>
             <div><label>Nome:</label> <span th:text="${lab.nome}"></span></div>
+
             <div class="actions">
-                <a th:href="@{/laboratorios/{id}(id=${lab.id})}" class="btn-back">Ver</a>
-                <a th:href="@{/laboratorios/{id}/edit(id=${lab.id})}" class="btn-back">Editar</a>
-                <form th:action="@{/laboratorios/{id}/delete(id=${lab.id})}" method="post" style="display:inline-flex;">
-                    <button type="submit">Deletar</button>
+                <button><a th:href="@{/laboratorios/{id}/edit(id=${lab.id})}" class="bnt-action">Editar</a></button>
+                <form th:action="@{/laboratorios/{id}/delete(id=${lab.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="bnt-action">Deletar</button>
                 </form>
             </div>
         </div>
     </div>
-    <a href="/" class="btn-back">Voltar</a>
 </div>
+
 </body>
 </html>

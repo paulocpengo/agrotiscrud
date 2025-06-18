@@ -62,7 +62,7 @@ class PessoaServiceTest {
         pessoa.setNome("Test Person");
         pessoa.setDataInicial(ZonedDateTime.now());
         pessoa.setDataFinal(ZonedDateTime.now().plusDays(1));
-        pessoa.setInfosPropriedade(propriedade);
+        pessoa.setPropriedade(propriedade);
         pessoa.setLaboratorio(laboratorio);
         pessoa.setObservacoes("Test observações");
     }

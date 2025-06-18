@@ -36,7 +36,7 @@ public class PessoaAPIController {
 		pessoa.setNome(pessoaDTO.nome());
 		pessoa.setDataInicial(pessoaDTO.dataInicial());
 		pessoa.setDataFinal(pessoaDTO.dataFinal());
-		pessoa.setInfosPropriedade(propriedade);
+		pessoa.setPropriedade(propriedade);
 		pessoa.setLaboratorio(laboratorio);
 		pessoa.setObservacoes(pessoaDTO.observacoes());
 

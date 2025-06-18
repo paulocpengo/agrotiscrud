@@ -81,12 +81,6 @@ public class PessoaController {
 		return "redirect:/pessoas";
 	}
 
-	@GetMapping("/{id}")
-	public String view(@PathVariable Long id, Model model) {
-		model.addAttribute("pessoa", pessoaService.findById(id));
-		return "pessoa/view";
-	}
-
 	@GetMapping("/{id}/edit")
 	public String editForm(@PathVariable Long id, Model model) {
 		model.addAttribute("pessoa", pessoaService.findById(id));

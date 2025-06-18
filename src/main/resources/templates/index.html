@@ -4,23 +4,51 @@
     <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
     <meta charset="UTF-8">
     <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .menu-item {
+            transition: all 0.3s ease;
+        }
+        .menu-item:hover {
+            background-color: #10b981;
+            transform: translateX(10px);
+        }
+    </style>
 </head>
-<body>
-<div class="header">AGROTIS</div>
 
-<div class="container">
+<body class="bg-gray-100 font-sans">
 
-    <div class="container">
-        <div class="text-center">Bem-vindo ao Sistema</div>
+<header class="bg-white shadow-md py-4 flex justify-center items-center" style="border-bottom: 3px solid gray;">
+    <img src="/img/agrotislogo.jpg" height="58" width="224" alt="Agrotis Logo"/>
+</header>
+
+<br>
+
+<main class="container mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-800">Bem-vindo ao Sistema</h1>
     </div>
 
-    <ul>
-        <li style="padding-top: 20px; padding-bottom: 20px;"><a href="/propriedades">Gerenciar Propriedades</a></li>
-        <li style="padding-top: 20px; padding-bottom: 20px;"><a href="/laboratorios">Gerenciar Laboratórios</a></li>
-        <li style="padding-top: 20px; padding-bottom: 20px;"><a href="/pessoas">Gerenciar Pessoas</a></li>
-    </ul>
-
-</div>
+    <nav class="bg-emerald-600 rounded-lg shadow-lg p-6 max-w-md mx-auto">
+        <ul class="space-y-4">
+            <li>
+                <a href="/propriedades" class="menu-item block text-white text-lg font-semibold py-3 px-4 rounded-md hover:text-white">
+                    Gerenciar Propriedades
+                </a>
+            </li>
+            <li>
+                <a href="/laboratorios" class="menu-item block text-white text-lg font-semibold py-3 px-4 rounded-md hover:text-white">
+                    Gerenciar Laboratórios
+                </a>
+            </li>
+            <li>
+                <a href="/pessoas" class="menu-item block text-white text-lg font-semibold py-3 px-4 rounded-md hover:text-white">
+                    Gerenciar Pessoas
+                </a>
+            </li>
+        </ul>
+    </nav>
+</main>
 
 </body>
 </html>

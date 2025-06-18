@@ -2,6 +2,7 @@ package com.agrotis.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,8 @@ public class Laboratorio {
 	private Long id;
 
 	@NotBlank(message = "Nome do laboratório é obrigatório")
+	@Size(max = 100, message = "O nome do laboratório não pode exceder 100 caracteres")
+	@Column(length = 100)
 	private String nome;
 }
 

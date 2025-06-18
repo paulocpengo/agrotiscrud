@@ -8,20 +8,41 @@ body {
 .header {
     text-align: center;
     padding: 10px;
-    background-color: #2E7D32;
+    background-color: #FFFFFF;
     color: #FFFFFF;
     font-size: 20px;
     margin-bottom: 20px;
+    border-bottom: 3px solid gray;
+}
+
+.header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #008661;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1)!important
+}
+
+.card-text-title {
+    text-align: left;
+    margin-left: 10px;
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+.card-button-save {
+    margin-left: auto;
 }
 
 .container {
-    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
 }
 
 h1 {
@@ -33,7 +54,14 @@ h1 {
 }
 
 .form-group {
+    margin: 20px;
+    width: 100%;
+}
+
+.form-group-no-wrap {
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: nowrap;
 }
 
 label {
@@ -76,7 +104,7 @@ input::placeholder, textarea::placeholder {
 }
 
 button {
-    background-color: #2E7D32;
+    background-color: #007661;
     color: #FFFFFF;
     padding: 10px 20px;
     border: none;
@@ -85,22 +113,34 @@ button {
     font-size: 14px;
 }
 
-button:hover {
-    background-color: #1B5E20;
+bnt-action {
+    background-color: #007661;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .btn-back {
-    background-color: #FFFFFF;
-    color: #2E7D32;
+    background-color: #008661;
+    color: #FFFFFF;
     padding: 10px 20px;
-    border: 1px solid #2E7D32;
+    border: none;
     border-radius: 4px;
-    text-decoration: none;
-    display: inline-block;
+    cursor: pointer;
     font-size: 14px;
-    margin-top: 10px;
+    text-decoration: none;
 }
 
-.btn-back:hover {
-    background-color: #E0E0E0;
+a {
+    color: #ffffff; /* Texto branco */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+a:hover, a:focus, a:active {
+    color: #ffffff; /* Mantém branco nos estados hover, focus e active */
+    text-decoration: none; /* Remove sublinhado nesses estados */
 }

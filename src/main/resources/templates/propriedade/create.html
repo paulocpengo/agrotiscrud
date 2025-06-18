@@ -7,18 +7,36 @@
     <link rel="stylesheet" href="/css/agrotis.css" th:href="@{/css/agrotis.css}">
 </head>
 <body>
-<div class="header">AGROTIS</div>
+
+<div class="header"><img src="/img/agrotislogo.jpg" height="58" width="224"/></div>
+
+<form th:action="@{/propriedades}" th:object="${propriedade}" method="post">
+
 <div class="container">
-    <h1>Novo Cadastro de Propriedade</h1>
-    <form th:action="@{/propriedades}" th:object="${propriedade}" method="post">
+    <div class="header-card">
+        <div class="card-text-title">
+            <a href="/propriedades" class="btn-back"> < </a>
+            Teste Back-End / <b>Criar Propriedade</b>
+        </div>
+        <div class="card-buttom-save">
+            <button type="submit">SALVAR</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="form-group-no-wrap">
+
         <div class="form-group">
             <label class="required">Nome:</label>
-            <input type="text" th:field="*{nome}" class="form-control" />
+            <input type="text" th:field="*{nome}" class="form-control" maxlength="100" />
             <span th:if="${#fields.hasErrors('nome')}" class="error" th:errors="*{nome}"></span>
         </div>
-        <button type="submit">SALVAR</button>
-    </form>
-    <a href="/propriedades" class="btn-back">Voltar</a>
+
+    </div>
+
 </div>
+
+</form>
 </body>
 </html>

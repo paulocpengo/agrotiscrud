@@ -1,10 +1,8 @@
 package com.agrotis.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,5 +15,7 @@ public class Propriedade {
 	private Long id;
 
 	@NotBlank(message = "Nome da propriedade é obrigatório")
+	@Size(max = 100, message = "O nome da propriedade não pode exceder 100 caracteres")
+	@Column(length = 100)
 	private String nome;
 }

@@ -4,57 +4,138 @@
     <th:block th:replace="~{fragments/no-cache :: no-cache}"></th:block>
     <meta charset="UTF-8">
     <title>Editar Cadastro</title>
-    <style>
-        .form-group { margin-bottom: 15px; }
-        label { font-weight: bold; }
-        .required:after { content: " *"; color: red; }
-        .error { color: red; font-size: 0.9em; }
-        button { background-color: #2E7D32; color: white; padding: 10px 20px; border: none; cursor: pointer; }
-        button:hover { background-color: #1B5E20; }
-    </style>
 </head>
 <body>
-<div style="max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
-    <h1>Editar Cadastro</h1>
+
+<div class="header"><img src="/img/agrotislogo.jpg" height="58" width="224"/></div>
+
+<div class="container">
+
     <form th:action="@{/pessoas/{id}(id=${pessoa.id})}" th:object="${pessoa}" method="post">
-        <div class="form-group">
-            <label class="required">Nome:</label>
-            <input type="text" th:field="*{nome}" class="form-control" />
-            <span th:if="${#fields.hasErrors('nome')}" class="error" th:errors="*{nome}"></span>
+
+        <div class="header-card">
+            <div class="card-text-title">
+                <a href="/pessoas" class="btn-back"> < </a>
+                Teste Back-End / <b>Editar Pessoa</b>
+            </div>
+            <div class="card-buttom-save">
+                <button type="submit">SALVAR</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="required">Data Inicial:</label>
-            <input type="date" th:field="*{dataInicial}" class="form-control" />
-            <span th:if="${#fields.hasErrors('dataInicial')}" class="error" th:errors="*{dataInicial}"></span>
+
+        <br>
+
+        <div class="form-group-no-wrap">
+            <div class="form-group">
+                <label class="required">Nome:</label>
+                <input type="text" th:field="*{nome}" class="form-control" maxlength="100"/>
+                <span th:if="${#fields.hasErrors('nome')}" class="error"
+                      th:errors="*{nome}"></span>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="required">Data Final:</label>
-            <input type="date" th:field="*{dataFinal}" class="form-control" />
-            <span th:if="${#fields.hasErrors('dataFinal')}" class="error" th:errors="*{dataFinal}"></span>
+
+        <div class="form-group-no-wrap">
+            <div class="form-group">
+                <label class="required">Data Inicial:</label>
+                <input type="date" th:field="*{dataInicial}" class="form-control"
+                       th:value="*{dataInicial != null ? #temporals.format(dataInicial, 'yyyy-MM-dd') : ''}"
+                       id="dataInicial" onchange="handleDateChange()"/>
+                <span th:if="${#fields.hasErrors('dataInicial')}" class="error"
+                      th:errors="*{dataInicial}"></span>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="required">Propriedade:</label>
-            <select th:field="*{infosPropriedade}" class="form-control">
-                <option value="">Selecione</option>
-                <option th:each="prop : ${propriedades}" th:value="${prop.id}" th:text="${prop.nome}"></option>
-            </select>
-            <span th:if="${#fields.hasErrors('infosPropriedade')}" class="error" th:errors="*{infosPropriedade}"></span>
+
+        <div class="form-group-no-wrap">
+            <div class="form-group">
+                <label class="required">Data Final:</label>
+                <input type="date" th:field="*{dataFinal}" class="form-control"
+                       th:value="*{dataFinal != null ? #temporals.format(dataFinal, 'yyyy-MM-dd') : ''}"
+                       id="dataFinal" onchange="validateFinalDate()"/>
+                <span th:if="${#fields.hasErrors('dataFinal')}" class="error"
+                      th:errors="*{dataFinal}"></span>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="required">Laboratório:</label>
-            <select th:field="*{laboratorio}" class="form-control">
-                <option value="">Selecione</option>
-                <option th:each="lab : ${laboratorios}" th:value="${lab.id}" th:text="${lab.nome}"></option>
-            </select>
-            <span th:if="${#fields.hasErrors('laboratorio')}" class="error" th:errors="*{laboratorio}"></span>
+
+        <div class="form-group-no-wrap">
+            <div class="form-group">
+                <label class="required">Propriedade:</label>
+                <select th:field="*{propriedade}" class="form-control">
+                    <option value="">Selecione</option>
+                    <option th:each="prop : ${propriedades}" th:value="${prop.id}"
+                            th:text="${prop.nome}"></option>
+                </select>
+                <span th:if="${#fields.hasErrors('propriedade')}" class="error"
+                      th:errors="*{propriedade}"></span>
+            </div>
         </div>
-        <div class="form-group">
-            <label>Observações:</label>
-            <textarea th:field="*{observacoes}" class="form-control"></textarea>
+
+        <div class="form-group-no-wrap">
+            <div class="form-group">
+                <label class="required">Laboratório:</label>
+                <select th:field="*{laboratorio}" class="form-control">
+                    <option value="">Selecione</option>
+                    <option th:each="lab : ${laboratorios}" th:value="${lab.id}"
+                            th:text="${lab.nome}"></option>
+                </select>
+                <span th:if="${#fields.hasErrors('laboratorio')}" class="error"
+                      th:errors="*{laboratorio}"></span>
+            </div>
         </div>
-        <button type="submit">SALVAR</button>
+
+        <div class="form-group-no-wrap">
+            <div class="form-group">
+                <label>Observações:</label>
+                <textarea th:field="*{observacoes}" class="form-control" maxlength="100"
+                          oninput="updateCharCount(this)"></textarea>
+                <span id="charCount" class="char-counter">0/100</span>
+            </div>
+        </div>
+
     </form>
-    <a href="/pessoas" style="margin-top: 10px; display: inline-block;">Voltar</a>
+
 </div>
+
+<script>
+    function updateCharCount(textarea) {
+        const maxLength = 100;
+        const currentLength = textarea.value.length;
+        const remaining = maxLength - currentLength;
+        document.getElementById('charCount').textContent = `${remaining}/100`;
+    }
+
+    function handleDateChange() {
+        const dataInicial = document.getElementById('dataInicial').value;
+        const dataFinal = document.getElementById('dataFinal').value;
+
+        if (dataInicial) {
+            // If dataFinal is empty, set it to dataInicial
+            if (!dataFinal) {
+                document.getElementById('dataFinal').value = dataInicial;
+            } else {
+                // If dataInicial is greater than dataFinal, reset dataFinal
+                if (dataInicial > dataFinal) {
+                    document.getElementById('dataFinal').value = '';
+                }
+            }
+        }
+    }
+
+    function validateFinalDate() {
+        const dataInicial = document.getElementById('dataInicial').value;
+        const dataFinal = document.getElementById('dataFinal').value;
+
+        // If dataFinal is set and is less than dataInicial, reset dataFinal
+        if (dataInicial && dataFinal && dataFinal < dataInicial) {
+            document.getElementById('dataFinal').value = '';
+        }
+    }
+
+    // Initialize character count on page load
+    updateCharCount(document.querySelector('textarea'));
+
+    // Trigger date validation on page load to ensure consistency
+    handleDateChange();
+</script>
+
 </body>
 </html>

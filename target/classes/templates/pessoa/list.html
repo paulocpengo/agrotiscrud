@@ -47,6 +47,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .actions form {
@@ -55,29 +56,39 @@
     </style>
 </head>
 <body>
-<div class="header">AGROTIS</div>
+
+<div class="header"><img src="/img/agrotislogo.jpg" height="58" width="224"/></div>
+
 <div class="container">
-    <h1>Lista de Pessoas</h1>
-    <div>
-        <a href="/" class="btn-back">Home</a>
-        <a href="/pessoas/create" class="btn-back">Criar Nova Pessoa</a>
+    <div class="header-card">
+        <div class="card-text-title">
+            <a href="/" class="btn-back"> < </a>
+            Teste Back-End / <b>Lista de Pessoas</b>
+        </div>
+        <div class="card-buttom-save">
+            <button class="bnt-action" th:onclick="'window.location.href=\'' + @{/pessoas/create} + '\''">Criar Pessoa</button>
+        </div>
     </div>
+
+    <br>
+
     <div class="person-list" th:each="pessoa : ${pessoas}">
         <div class="person-card">
             <div><label>ID:</label> <span th:text="${pessoa.id}"></span></div>
             <div><label>Nome:</label> <span th:text="${pessoa.nome}"></span></div>
-            <div><label>Data Inicial:</label> <span th:text="${#temporals.format(pessoa.dataInicial, 'yyyy-MM-dd')}"></span></div>
-            <div><label>Data Final:</label> <span th:text="${#temporals.format(pessoa.dataFinal, 'yyyy-MM-dd')}"></span></div>
-            <div><label>Propriedade:</label> <span th:text="${pessoa.infosPropriedade.nome}"></span></div>
+            <div><label>Data Inicial:</label> <span th:text="${#temporals.format(pessoa.dataInicial, 'dd/MM/yyyy')}"></span></div>
+            <div><label>Data Final:</label> <span th:text="${#temporals.format(pessoa.dataFinal, 'dd/MM/yyyy')}"></span></div>
+            <div><label>Propriedade:</label> <span th:text="${pessoa.propriedade.nome}"></span></div>
             <div><label>Laboratório:</label> <span th:text="${pessoa.laboratorio.nome}"></span></div>
             <div><label>Observações:</label> <span th:text="${pessoa.observacoes}"></span></div>
+
             <div class="actions">
-                <a th:href="@{/pessoas/{id}(id=${pessoa.id})}" class="btn-back">Ver</a>
-                <a th:href="@{/pessoas/{id}/edit(id=${pessoa.id})}" class="btn-back">Editar</a>
+                <button class="bnt-action" th:onclick="'window.location.href=\'' + @{/pessoas/{id}/edit(id=${pessoa.id})} + '\''">Editar</button>
                 <form th:action="@{/pessoas/{id}/delete(id=${pessoa.id})}" method="post" style="display:inline;">
-                    <button type="submit">Deletar</button>
+                    <button type="submit" class="bnt-action">Deletar</button>
                 </form>
             </div>
+
         </div>
     </div>
 </div>

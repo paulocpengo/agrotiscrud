@@ -36,7 +36,7 @@ public class PessoaService {
 		existing.setNome(pessoa.getNome());
 		existing.setDataInicial(pessoa.getDataInicial());
 		existing.setDataFinal(pessoa.getDataFinal());
-		existing.setInfosPropriedade(pessoa.getInfosPropriedade());
+		existing.setPropriedade(pessoa.getPropriedade());
 		existing.setLaboratorio(pessoa.getLaboratorio());
 		existing.setObservacoes(pessoa.getObservacoes());
 		validateReferences(pessoa);
@@ -49,9 +49,9 @@ public class PessoaService {
 	}
 
 	private void validateReferences(Pessoa pessoa) {
-		if (pessoa.getInfosPropriedade() != null && pessoa.getInfosPropriedade().getId() != null) {
-			propriedadeRepository.findById(pessoa.getInfosPropriedade().getId())
-								 .orElseThrow(() -> new ResourceNotFoundException("Propriedade não encontrada com ID: " + pessoa.getInfosPropriedade().getId()));
+		if (pessoa.getPropriedade() != null && pessoa.getPropriedade().getId() != null) {
+			propriedadeRepository.findById(pessoa.getPropriedade().getId())
+								 .orElseThrow(() -> new ResourceNotFoundException("Propriedade não encontrada com ID: " + pessoa.getPropriedade().getId()));
 		}
 		if (pessoa.getLaboratorio() != null && pessoa.getLaboratorio().getId() != null) {
 			laboratorioRepository.findById(pessoa.getLaboratorio().getId())

@@ -22,7 +22,7 @@
             border-radius: 4px;
             background-color: #FFFFFF;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            align-items: center; /* Ensure vertical alignment of items */
+            align-items: center;
         }
 
         .property-card div {
@@ -47,42 +47,79 @@
         .actions {
             display: flex;
             gap: 10px;
-            align-items: center; /* Vertically center align buttons */
+            align-items: center;
         }
 
         .actions form {
             display: inline-flex;
             align-items: center;
-            margin: 0; /* Remove any default margin */
+            margin: 0;
         }
 
         .actions button, .actions a.btn-back {
-            padding: 8px 15px; /* Consistent padding for all buttons */
-            font-size: 14px; /* Consistent font size */
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert-error {
+            background-color: #fee2e2;
+            border: 1px solid #ef4444;
+            color: #b91c1c;
+        }
+
+        .alert-success {
+            background-color: #d1fae5;
+            border: 1px solid #10b981;
+            color: #065f46;
         }
     </style>
 </head>
 <body>
-<div class="header">AGROTIS</div>
+
+<div class="header"><img src="/img/agrotislogo.jpg" height="58" width="224"/></div>
+
 <div class="container">
-    <h1>Lista de Propriedades</h1>
-    <div>
-        <a href="/propriedades/create" class="btn-back">Nova Propriedade</a>
+    <div class="header-card">
+        <div class="card-text-title">
+            <a href="/" class="btn-back"> < </a>
+            Teste Back-End / <b>Lista de Propriedades</b>
+        </div>
+        <div class="card-buttom-save">
+            <button class="bnt-action" th:onclick="'window.location.href=\'' + @{/propriedades/create} + '\''">Criar Propriedade</button>
+        </div>
     </div>
+
+    <br>
+
+    <!-- Exibir mensagens de erro ou sucesso -->
+    <div th:if="${errorMessage}" class="alert alert-error">
+        <span th:text="${errorMessage}"></span>
+    </div>
+    <div th:if="${successMessage}" class="alert alert-success">
+        <span th:text="${successMessage}"></span>
+    </div>
+
     <div class="property-list" th:each="prop : ${propriedades}">
         <div class="property-card">
             <div><label>ID:</label> <span th:text="${prop.id}"></span></div>
             <div><label>Nome:</label> <span th:text="${prop.nome}"></span></div>
+
             <div class="actions">
-                <a th:href="@{/propriedades/{id}(id=${prop.id})}" class="btn-back">Ver</a>
-                <a th:href="@{/propriedades/{id}/edit(id=${prop.id})}" class="btn-back">Editar</a>
-                <form th:action="@{/propriedades/{id}/delete(id=${prop.id})}" method="post" style="display:inline-flex;">
-                    <button type="submit">Deletar</button>
+                <button class="bnt-action" th:onclick="'window.location.href=\'' + @{/propriedades/{id}/edit(id=${prop.id})} + '\''">Editar</button>
+                <form th:action="@{/propriedades/{id}/delete(id=${prop.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="bnt-action">Deletar</button>
                 </form>
             </div>
         </div>
     </div>
-    <a href="/" class="btn-back">Voltar</a>
 </div>
+
 </body>
 </html>
